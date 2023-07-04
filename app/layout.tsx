@@ -11,10 +11,10 @@ import { MainNav } from '@/components/main-nav';
 const fontMont = Montserrat({ subsets: ['latin'], variable: '--font-mont' });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? ''),
   title: {
-    default: siteConfig.name,
-    template: '%s | ' + siteConfig.name
+    default: siteConfig.siteName,
+    template: '%s | ' + siteConfig.siteName
   },
   keywords: ['Next.js', 'React', 'Tailwind CSS', 'Server Components'],
   authors: [
