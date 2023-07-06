@@ -7,6 +7,7 @@ import { siteConfig } from '@/config/siteConfig';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { MainNav } from '@/components/main-nav';
+import Footer from '@/components/footer';
 
 const fontMont = Montserrat({ subsets: ['latin'], variable: '--font-mont' });
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <MainNav />
           {children}
+          <Footer />
         </ThemeProvider>
         <Toaster />
       </body>
