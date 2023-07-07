@@ -1,4 +1,4 @@
-export interface StrapiWrapper<TData> {
+export interface StrapiAllWrapper<TData> {
   data: StrapiItem<TData>[];
   meta: {
     pagination: {
@@ -10,8 +10,13 @@ export interface StrapiWrapper<TData> {
   };
 }
 
+export interface StrapiOneWrapper<TData> {
+  data: StrapiItem<TData>;
+  meta: {};
+}
+
 export interface StrapiItem<TData> {
-  id: string;
+  id: number;
   attributes: TData;
 }
 

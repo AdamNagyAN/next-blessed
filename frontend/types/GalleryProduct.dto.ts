@@ -1,18 +1,11 @@
-import { StrapiAllWrapper, StrapiImageFormat } from '@/types/strapi';
+import { StrapiImageFormat } from '@/types/strapi';
 
-type Category = Omit<
-  StrapiAllWrapper<{
-    name: string;
-  }>,
-  'meta'
->;
-
-export interface ProductDto {
+export default interface GalleryProductDto {
   title: string;
   description: string;
   price: number;
   newPrice: number | null;
-  images: {
+  coverImage: {
     data: {
       id: number;
       attributes: StrapiImageFormat & {
@@ -23,8 +16,6 @@ export interface ProductDto {
           large: StrapiImageFormat;
         };
       };
-    }[];
+    };
   };
-  categories: Category;
-  sub_categories: Category;
 }

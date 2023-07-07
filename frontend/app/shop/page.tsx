@@ -1,13 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import { axiosBase } from '@/lib/axiosBase';
-import { StrapiWrapper } from '@/types/strapi';
-import ProductDto from '@/types/Product.dto';
+import { StrapiAllWrapper } from '@/types/strapi';
+import GalleryProductDto from '@/types/GalleryProduct.dto';
 import { Metadata } from 'next';
 import { siteConfig } from '@/config/siteConfig';
 import Link from 'next/link';
 
-async function getProducts(): Promise<StrapiWrapper<ProductDto>> {
+async function getProducts(): Promise<StrapiAllWrapper<GalleryProductDto>> {
   const products = await axiosBase('/products?populate[0]=coverImage');
   return products.data;
 }
@@ -21,11 +21,11 @@ export default async function Shop() {
   return (
     <section>
       <div className="container">
-        <h2 className="text-center py-8 my-8">Shop</h2>
+        <h2 className="text-center pb-8 mb-8">Shop</h2>
         <div>
           <div className="grid grid-cols-1 grid-rows-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.data.map((product) => (
-              <Card key={product.id} product={product.attributes} />
+              <Card key={product.id} product={product.attributes} id={product.id} />
             ))}
           </div>
         </div>
@@ -34,10 +34,10 @@ export default async function Shop() {
   );
 }
 
-type CardProps = { product: ProductDto };
-function Card({ product }: CardProps) {
+type CardProps = { product: GalleryProductDto } & { id: number };
+function Card({ product, id }: CardProps) {
   return (
-    <Link href="/">
+    <Link href={`/product/${id}`}>
       <div className="group">
         <div className="aspect-[3/4] relative overflow-hidden rounded-lg">
           <Image

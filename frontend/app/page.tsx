@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex min-h-screen flex-col items-center justify-between">
         <div className="grid grid-cols-1 grid-rows-none lg:grid-cols-3 lg:grid-rows-2 gap-8 max-w-screen-xl w-full min-h-[700px] uppercase">
           <Card className="row-span-2 lg:col-span-2" image="/assets/hero2.jpg">
             <h1 className="font-bold text-3xl w-1/2 text-black">

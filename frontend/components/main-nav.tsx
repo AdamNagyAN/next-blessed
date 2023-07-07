@@ -16,7 +16,7 @@ const navLinks = [
 
 export function MainNav() {
   return (
-    <nav className="w-full">
+    <nav className="w-full mb-10">
       <div className="max-w-screen-xl mx-auto flex items-center justify-between px-4">
         <div className="flex items-center">
           <span className="font-bold py-4 text-lg mr-8">BLESSED.</span>
