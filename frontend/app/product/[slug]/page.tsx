@@ -2,7 +2,6 @@ import React from 'react';
 import { axiosBase } from '@/lib/axiosBase';
 import { StrapiOneWrapper } from '@/types/strapi';
 import { ProductDto } from '@/types/Product.dto';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import ImageCarousel from '@/app/product/[slug]/image-carousel';
@@ -30,15 +29,6 @@ export async function Page({ params }: PageProps) {
             <div className="mt-6">
               <h2 className={cn('text-lg border-0')}>Description:</h2>
               <p className="text-sm">{data.attributes.description.split('\n')}</p>
-            </div>
-            <div className="flex gap-3 mt-6 items-center">
-              <h2 className={cn('text-lg border-0 pb-0')}>Tags: </h2>
-              {data.attributes.categories.data.map((category) => (
-                <Badge key={category.id}>{category.attributes.name}</Badge>
-              ))}
-              {data.attributes.sub_categories.data.map((category) => (
-                <Badge key={category.id}>{category.attributes.name}</Badge>
-              ))}
             </div>
             <Button className="mt-6">Add to cart</Button>
           </div>

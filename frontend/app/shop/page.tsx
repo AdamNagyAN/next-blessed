@@ -6,6 +6,7 @@ import GalleryProductDto from '@/types/GalleryProduct.dto';
 import { Metadata } from 'next';
 import { siteConfig } from '@/config/siteConfig';
 import Link from 'next/link';
+import FilterContainer from '@/app/shop/filter/FilterContainer';
 
 async function getProducts(): Promise<StrapiAllWrapper<GalleryProductDto>> {
   const products = await axiosBase('/products?populate[0]=coverImage');
@@ -21,7 +22,10 @@ export default async function Shop() {
   return (
     <section>
       <div className="container">
-        <h2 className="text-center pb-8 mb-8">Shop</h2>
+        <h1 className="font-bold text-3xl text-center pb-8 mb-8 uppercase">Shop</h1>
+        <div className="flex w-full justify-between gap-8 mb-8 border-1 border p-8 rounded-lg">
+          <FilterContainer />
+        </div>
         <div>
           <div className="grid grid-cols-1 grid-rows-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {products.data.map((product) => (

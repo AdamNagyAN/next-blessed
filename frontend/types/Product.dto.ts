@@ -1,7 +1,7 @@
-import { StrapiAllWrapper, StrapiImageFormat } from '@/types/strapi';
+import { StrapiImageFormat, StrapiOneWrapper } from '@/types/strapi';
 
 type Category = Omit<
-  StrapiAllWrapper<{
+  StrapiOneWrapper<{
     name: string;
   }>,
   'meta'
