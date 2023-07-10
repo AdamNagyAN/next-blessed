@@ -1,6 +1,7 @@
 import Link, { LinkProps } from 'next/link';
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { ThemeSwitcher } from '@/components/organisms/theme-switcher';
 
 type StyledNavLinkProps = LinkProps & { children: React.ReactNode };
 function StyledNavLink(props: StyledNavLinkProps) {
@@ -31,6 +32,7 @@ export function MainNav() {
         <div className="flex space-x-2">
           <Button variant="outline">Login</Button>
           <Button>Sign Up</Button>
+          <ThemeSwitcher />
         </div>
       </div>
     </nav>

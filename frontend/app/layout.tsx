@@ -6,8 +6,8 @@ import { cn } from '@/lib/utils';
 import { siteConfig } from '@/config/siteConfig';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
-import { MainNav } from '@/components/main-nav';
-import Footer from '@/components/footer';
+import { MainNav } from '@/components/organisms/main-nav';
+import Footer from '@/components/organisms/footer';
 
 const fontMont = Montserrat({ subsets: ['latin'], variable: '--font-mont' });
 

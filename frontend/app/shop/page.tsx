@@ -57,7 +57,7 @@ function Card({ product, id }: CardProps) {
       <div className="group">
         <div className="aspect-[3/4] relative overflow-hidden rounded-lg">
           {discountPercentage > 0 && (
-            <div className="absolute top-2 right-0 bg-destructive z-10 font-bold p-2">
+            <div className="absolute top-2 right-0 bg-destructive text-destructive-foreground z-10 font-bold p-2">
               {Math.round(discountPercentage)}%
             </div>
           )}
