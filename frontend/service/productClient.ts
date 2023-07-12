@@ -11,7 +11,9 @@ type getAllProductsParams = {
 const getAllProducts = ({
   subCategories = [],
   price = []
-}: getAllProductsParams): AxiosPromise<StrapiAllWrapper<GalleryProductDto>> => {
+}: getAllProductsParams): AxiosPromise<
+  StrapiAllWrapper<GalleryProductDto>
+> => {
   const query = qs.stringify({
     filters: {
       sub_category: {
