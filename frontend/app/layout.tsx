@@ -9,7 +9,10 @@ import { Toaster } from '@/components/ui/toaster';
 import { MainNav } from '@/components/organisms/main-nav';
 import Footer from '@/components/organisms/footer';
 
-const fontMont = Montserrat({ subsets: ['latin'], variable: '--font-mont' });
+const fontMont = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-mont'
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? ''),
@@ -34,11 +37,22 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className={cn('min-h-screen bg-background antialiased font-mont', fontMont.variable)}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body
+        className={cn(
+          'min-h-screen bg-background antialiased font-mont',
+          fontMont.variable
+        )}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem>
           <MainNav />
           {children}
           <Footer />
