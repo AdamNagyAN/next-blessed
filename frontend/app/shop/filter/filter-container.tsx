@@ -31,29 +31,22 @@ function FilterContainer({
   const priceFromSearchParams: number[] = searchParams.price
     ? JSON.parse(searchParams.price)
     : [0, DEFAULT_MAX_PRICE];
-  const {
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors }
-  } = useForm<FilterValues>({
-    resolver: yupResolver(filterSchema()),
-    mode: 'onSubmit',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      'sub-categories': searchParams['sub-categories']
-        ? JSON.parse(searchParams['sub-categories'])
-        : [],
-      price: {
-        from: priceFromSearchParams[0],
-        to: priceFromSearchParams[1]
-      },
-      sizes: []
-    }
-  });
-
-  console.log(errors);
+  const { control, handleSubmit, watch, setValue } =
+    useForm<FilterValues>({
+      resolver: yupResolver(filterSchema()),
+      mode: 'onSubmit',
+      reValidateMode: 'onChange',
+      defaultValues: {
+        'sub-categories': searchParams['sub-categories']
+          ? JSON.parse(searchParams['sub-categories'])
+          : [],
+        price: {
+          from: priceFromSearchParams[0],
+          to: priceFromSearchParams[1]
+        },
+        sizes: []
+      }
+    });
 
   const transformedCategories = React.useMemo(
     () =>
@@ -65,17 +58,14 @@ function FilterContainer({
   );
 
   const onFilter = (data: FilterValues) => {
-    console.log(data);
-    const searchParams = new URLSearchParams({
+    const newSearchParams = new URLSearchParams({
       'sub-categories': JSON.stringify(data['sub-categories']),
       price: JSON.stringify([data.price.from, data.price.to])
     });
-    console.log(searchParams.toString());
-    router.push(`${path}?${searchParams}`);
+    router.push(`${path}?${newSearchParams}`);
   };
 
   const watchPrice = watch('price');
-  console.log(watchPrice);
 
   return (
     <form onSubmit={handleSubmit(onFilter)}>

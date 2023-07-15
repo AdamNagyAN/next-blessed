@@ -5,16 +5,22 @@ import GalleryProductDto from '@/types/GalleryProduct.dto';
 import { axiosBase } from '@/lib/axiosBase';
 
 type getAllProductsParams = {
+  page: number;
   subCategories?: string[];
   price?: number[];
 };
 const getAllProducts = ({
+  page,
   subCategories = [],
   price = []
 }: getAllProductsParams): AxiosPromise<
   StrapiAllWrapper<GalleryProductDto>
 > => {
   const query = qs.stringify({
+    pagination: {
+      page: page,
+      pageSize: 12
+    },
     filters: {
       sub_category: {
         name: {

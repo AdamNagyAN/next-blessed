@@ -14,6 +14,7 @@ import formatPrice from '@/lib/formatPrice';
 import { cn } from '@/lib/utils';
 import { SearchParams } from '@/app/shop/types/SearchParams';
 import { ImageOff } from 'lucide-react';
+import Pagination from '@/app/shop/pagination';
 
 async function getProducts(searchParams: SearchParams) {
   console.log(searchParams);
@@ -22,7 +23,10 @@ async function getProducts(searchParams: SearchParams) {
       subCategories: searchParams['sub-categories']
         ? JSON.parse(searchParams['sub-categories'])
         : [],
-      price: searchParams.price ? JSON.parse(searchParams.price) : []
+      price: searchParams.price ? JSON.parse(searchParams.price) : [],
+      page: Number.isInteger(Number(searchParams.page))
+        ? Number(searchParams.page)
+        : 1
     });
   const categories: AxiosResponse<StrapiAllWrapper<CategoryDto>> =
     await axiosBase('/sub-categories');
@@ -50,25 +54,29 @@ export default async function Shop({ searchParams }: ShopProps) {
           categories={categories}
           searchParams={searchParams}
         />
-        <div>
-          <div className="grid grid-cols-1 grid-rows-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {products.data.length === 0 && (
-              <div className="mx-auto text-center col-span-4">
-                <h2>No products found</h2>
-                <p>
-                  Try changing your filters, or check back later for
-                  new products
-                </p>
-              </div>
-            )}
-            {products.data.map((product) => (
-              <Card
-                key={product.id}
-                product={product.attributes}
-                id={product.id}
-              />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 grid-rows-none md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-10">
+          {products.data.length === 0 && (
+            <div className="mx-auto text-center col-span-4">
+              <h2>No products found</h2>
+              <p>
+                Try changing your filters, or check back later for new
+                products
+              </p>
+            </div>
+          )}
+          {products.data.map((product) => (
+            <Card
+              key={product.id}
+              product={product.attributes}
+              id={product.id}
+            />
+          ))}
+        </div>
+        <div className="flex justify-center">
+          <Pagination
+            searchParams={searchParams}
+            pageCount={products.meta.pagination.pageCount}
+          />
         </div>
       </div>
     </section>
