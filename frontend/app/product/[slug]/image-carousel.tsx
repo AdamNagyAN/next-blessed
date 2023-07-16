@@ -26,8 +26,6 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
     ).toString()
   }));
 
-  console.log(images);
-
   return (
     <>
       <Swiper

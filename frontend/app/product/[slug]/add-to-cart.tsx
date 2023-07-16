@@ -5,13 +5,17 @@ import { useDispatch } from 'react-redux';
 import { Button } from '@/components/ui/button';
 import { cartActions } from '@/store/slices/cart.slice';
 
-const AddToCart = () => {
+interface AddToCartProps {
+  id: number;
+}
+
+const AddToCart: React.FC<AddToCartProps> = ({ id }) => {
   const dispatch = useDispatch();
 
   const onAddToCart = () => {
     dispatch(
       cartActions.addToCart({
-        id: 1,
+        id,
         size: 'M',
         quantity: 1
       })

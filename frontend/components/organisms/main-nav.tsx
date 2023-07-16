@@ -5,8 +5,10 @@ import { ThemeSwitcher } from '@/components/organisms/theme-switcher';
 import { ROUTES } from '@/lib/Routes';
 import CartButton from '@/components/organisms/cart/cart-button';
 import StoreProvider from '@/store/store-provider';
+import QueryClientProvider from '@/lib/query-client-provider';
 
 type StyledNavLinkProps = LinkProps & { children: React.ReactNode };
+
 function StyledNavLink(props: StyledNavLinkProps) {
   const { children, ...rest } = props;
   return <Link {...rest}>{children}</Link>;
@@ -39,9 +41,12 @@ export function MainNav() {
         <div className="flex space-x-2">
           <Button variant="outline">Login</Button>
           <Button>Sign Up</Button>
-          <StoreProvider>
-            <CartButton />
-          </StoreProvider>
+
+          <QueryClientProvider>
+            <StoreProvider>
+              <CartButton />
+            </StoreProvider>
+          </QueryClientProvider>
           <ThemeSwitcher />
         </div>
       </div>

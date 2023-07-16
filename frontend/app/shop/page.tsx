@@ -17,7 +17,6 @@ import { ImageOff } from 'lucide-react';
 import Pagination from '@/app/shop/pagination';
 
 async function getProducts(searchParams: SearchParams) {
-  console.log(searchParams);
   const products: AxiosResponse<StrapiAllWrapper<GalleryProductDto>> =
     await productClient.getAllProducts({
       subCategories: searchParams['sub-categories']
@@ -84,6 +83,7 @@ export default async function Shop({ searchParams }: ShopProps) {
 }
 
 type CardProps = { product: GalleryProductDto } & { id: number };
+
 function Card({ product, id }: CardProps) {
   const discountPercentage: number = product.newPrice
     ? 100 - (product.newPrice / product.price) * 100

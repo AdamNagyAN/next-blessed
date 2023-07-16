@@ -6,7 +6,7 @@ export interface CardItem {
   quantity: number;
 }
 
-const CARD_ITEMS_QUANTITY_LIMIT = 10;
+export const CARD_ITEMS_QUANTITY_LIMIT = 10;
 
 export interface CartSlice {
   cart: CardItem[];
@@ -14,6 +14,13 @@ export interface CartSlice {
 
 const initialState: CartSlice = {
   cart: []
+};
+
+const getNewQuantity = (newValue: number): number => {
+  if (newValue < 1) return 1;
+  if (newValue > CARD_ITEMS_QUANTITY_LIMIT)
+    return CARD_ITEMS_QUANTITY_LIMIT;
+  return newValue;
 };
 
 const cartSlice = createSlice({
@@ -34,10 +41,7 @@ const cartSlice = createSlice({
           ) {
             return {
               ...it,
-              quantity: Math.min(
-                it.quantity + action.payload.quantity,
-                CARD_ITEMS_QUANTITY_LIMIT
-              )
+              quantity: getNewQuantity(it.quantity + 1)
             };
           }
           return it;
@@ -51,6 +55,31 @@ const cartSlice = createSlice({
           action.payload.quantity,
           CARD_ITEMS_QUANTITY_LIMIT
         )
+      });
+    },
+    removeItem(state, action) {
+      state.cart = state.cart.filter(
+        (it) =>
+          it.id !== action.payload.id && it.size !== action.payload.id
+      );
+    },
+    updateQuantity(
+      state,
+      action: {
+        payload: { id: number; size: string; quantity: number };
+      }
+    ) {
+      state.cart = state.cart.map((it) => {
+        if (
+          it.id === action.payload.id &&
+          it.size === action.payload.size
+        ) {
+          return {
+            ...it,
+            quantity: getNewQuantity(action.payload.quantity)
+          };
+        }
+        return it;
       });
     }
   }

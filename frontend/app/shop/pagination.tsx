@@ -31,6 +31,7 @@ interface PaginationProps {
   searchParams: SearchParams;
   pageCount: number;
 }
+
 const Pagination: React.FC<PaginationProps> = ({
   searchParams,
   pageCount
@@ -40,10 +41,6 @@ const Pagination: React.FC<PaginationProps> = ({
   const currentPage = Number.isInteger(Number(searchParams.page))
     ? Number(searchParams.page)
     : 1;
-
-  console.log({
-    numbers: generateNumbers(10, 1, PAGINATION_OFFSET)
-  });
 
   const numbers = generateNumbers(
     pageCount,
@@ -74,8 +71,8 @@ const Pagination: React.FC<PaginationProps> = ({
 
       {numbers.map((number) => (
         <Button
+          key={number}
           variant={currentPage === number ? undefined : 'secondary'}
-          key="number"
           onClick={() => setPage(number)}>
           {number}
         </Button>

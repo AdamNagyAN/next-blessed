@@ -9,7 +9,7 @@ import formatPrice from '@/lib/formatPrice';
 import AddToCart from '@/app/product/[slug]/add-to-cart';
 import StoreProvider from '@/store/store-provider';
 
-export async function getProduct(
+async function getProduct(
   slug: string
 ): Promise<StrapiOneWrapper<ProductDto>> {
   const response = await axiosBase.get(
@@ -19,7 +19,8 @@ export async function getProduct(
 }
 
 type PageProps = { params: { slug: string } };
-export async function Page({ params }: PageProps) {
+
+export async function ProductPage({ params }: PageProps) {
   const { slug } = params;
   const { data } = await getProduct(slug);
   const {
@@ -29,7 +30,6 @@ export async function Page({ params }: PageProps) {
     ? 100 - (newPrice / price) * 100
     : 0;
 
-  console.log(data);
   return (
     <main>
       <div className="container">
@@ -60,7 +60,7 @@ export async function Page({ params }: PageProps) {
               </p>
             </div>
             <StoreProvider>
-              <AddToCart />
+              <AddToCart id={data.id} />
             </StoreProvider>
           </div>
         </div>
@@ -69,4 +69,4 @@ export async function Page({ params }: PageProps) {
   );
 }
 
-export default Page;
+export default ProductPage;

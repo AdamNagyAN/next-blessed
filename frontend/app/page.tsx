@@ -8,7 +8,9 @@ export default function Home() {
     <>
       <main className="flex min-h-screen flex-col items-center justify-between">
         <div className="grid grid-cols-1 grid-rows-none lg:grid-cols-3 lg:grid-rows-2 gap-8 max-w-screen-xl w-full min-h-[700px] uppercase">
-          <Card className="row-span-2 lg:col-span-2" image="/assets/hero2.jpg">
+          <Card
+            className="row-span-2 lg:col-span-2"
+            image="/assets/hero2.jpg">
             <h1 className="font-bold text-3xl w-1/2 text-black">
               The inspiration behing our backpack
             </h1>
@@ -27,7 +29,10 @@ export default function Home() {
   );
 }
 
-type CardProps = React.ButtonHTMLAttributes<HTMLDivElement> & { image: string };
+type CardProps = React.ButtonHTMLAttributes<HTMLDivElement> & {
+  image: string;
+};
+
 function Card({ children, className, image }: CardProps) {
   return (
     <div className={cn('relative text-2xl', className)}>

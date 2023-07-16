@@ -1,7 +1,10 @@
 // Inspired by react-hot-toast library
 import * as React from 'react';
 
-import type { ToastActionElement, ToastProps } from '@/components/ui/toast';
+import type {
+  ToastActionElement,
+  ToastProps
+} from '@/components/ui/toast';
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;
@@ -51,7 +54,10 @@ interface State {
   toasts: ToasterToast[];
 }
 
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
+const toastTimeouts = new Map<
+  string,
+  ReturnType<typeof setTimeout>
+>();
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
@@ -80,7 +86,9 @@ export const reducer = (state: State, action: Action): State => {
     case 'UPDATE_TOAST':
       return {
         ...state,
-        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t))
+        toasts: state.toasts.map((t) =>
+          t.id === action.toast.id ? { ...t, ...action.toast } : t
+        )
       };
 
     case 'DISMISS_TOAST': {
@@ -122,6 +130,7 @@ export const reducer = (state: State, action: Action): State => {
   }
 };
 
+// eslint-disable-next-line no-unused-vars
 const listeners: Array<(state: State) => void> = [];
 
 let memoryState: State = { toasts: [] };
@@ -143,7 +152,8 @@ function toast({ ...props }: Toast) {
       type: 'UPDATE_TOAST',
       toast: { ...props, id }
     });
-  const dismiss = () => dispatch({ type: 'DISMISS_TOAST', toastId: id });
+  const dismiss = () =>
+    dispatch({ type: 'DISMISS_TOAST', toastId: id });
 
   dispatch({
     type: 'ADD_TOAST',
@@ -180,7 +190,8 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: 'DISMISS_TOAST', toastId })
+    dismiss: (toastId?: string) =>
+      dispatch({ type: 'DISMISS_TOAST', toastId })
   };
 }
 

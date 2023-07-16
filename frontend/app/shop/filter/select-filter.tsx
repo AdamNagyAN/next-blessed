@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge';
 
 interface SelectFilterProps {
   value: string[] | undefined;
+  // eslint-disable-next-line no-unused-vars
   onChange: (value: string[]) => void;
   options: { value: string; label: string }[];
 }
@@ -35,6 +36,7 @@ function SelectFilter({
           <PopoverTrigger asChild>
             <button
               className="hover:bg-transparent flex items-center justify-between w-full"
+              // eslint-disable-next-line jsx-a11y/role-has-required-aria-props
               role="combobox"
               aria-expanded={open}>
               <h3 className="font-bold uppercase">Subcategory</h3>

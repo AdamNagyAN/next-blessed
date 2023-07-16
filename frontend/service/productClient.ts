@@ -3,6 +3,7 @@ import * as qs from 'qs';
 import { StrapiAllWrapper } from '@/types/strapi';
 import GalleryProductDto from '@/types/GalleryProduct.dto';
 import { axiosBase } from '@/lib/axiosBase';
+import CartProductDto from '@/service/dto/CartProduct.dto';
 
 type getAllProductsParams = {
   page: number;
@@ -32,14 +33,27 @@ const getAllProducts = ({
       }
     }
   });
-  console.log(query);
-  console.log(`/products?populate[0]=coverImage&${query}`);
 
   return axiosBase(`/products?populate[0]=coverImage&${query}`);
 };
 
+const getForCart = (
+  idList: number[]
+): AxiosPromise<StrapiAllWrapper<CartProductDto>> => {
+  const query = qs.stringify({
+    filters: {
+      id: {
+        $eq: idList
+      }
+    },
+    populate: ['coverImage', 'category', 'sub_category']
+  });
+  return axiosBase(`/products?${query}`);
+};
+
 const productClient = {
-  getAllProducts
+  getAllProducts,
+  getForCart
 };
 
 export default productClient;
