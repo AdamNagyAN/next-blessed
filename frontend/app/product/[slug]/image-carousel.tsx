@@ -26,10 +26,12 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
     ).toString()
   }));
 
+  // @ts-ignore
   return (
     <>
       <Swiper
         style={{
+          // @ts-ignore
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff'
         }}
@@ -51,6 +53,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
       </Swiper>
       <Swiper
         className="mt-4"
+        // @ts-ignore
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
         slidesPerView={4}

@@ -20,7 +20,7 @@ async function getProduct(
 
 type PageProps = { params: { slug: string } };
 
-export async function ProductPage({ params }: PageProps) {
+async function ProductPage({ params }: PageProps) {
   const { slug } = params;
   const { data } = await getProduct(slug);
   const {
